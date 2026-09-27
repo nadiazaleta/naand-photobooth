@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Photobooth</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================= -->
+  <!-- HALAMAN 1: HALAMAN AWAL (HERO) -->
+  <!-- ============================= -->
+  <section id="pageStart" class="page active">
+    <div class="hero-pink">
+      <!-- Mockup strip dekoratif, dimiringkan seperti foto berserakan -->
+      <div class="deco-strip deco-strip-left" aria-hidden="true">
+        <span class="deco-photo"></span>
+        <span class="deco-photo"></span>
+        <span class="deco-photo"></span>
+      </div>
+      <div class="deco-strip deco-strip-right" aria-hidden="true">
+        <span class="deco-photo"></span>
+        <span class="deco-photo"></span>
+        <span class="deco-photo"></span>
+      </div>
+
+      <div class="container hero-content">
+        <span class="eyebrow">est. • 2026</span>
+        <h1 class="brand-word">nanad<span class="brand-dot">.</span>photobooth</h1>
+        <p class="subtitle">Capture the moment, cherish the magic ✨</p>
+        <button id="btnStartCamera" class="btn btn-pink">
+          <span>Mulai Sesi</span>
+          <span class="btn-icon">📷</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- HALAMAN 2: PILIH LAYOUT/JUMLAH POSE -->
+  <!-- ============================= -->
+  <section id="pageLayout" class="page">
+    <div class="container">
+      <span class="eyebrow">Langkah 1</span>
+      <h2 class="title-small">Pilih Layout</h2>
+      <p class="subtitle">Pilih jumlah pose sesuai keinginanmu</p>
+
+      <div class="layout-grid" id="layoutPicker">
+        <button class="layout-card active" data-layout="a" type="button">
+          <span class="layout-preview layout-preview-1col">
+            <span class="mini-photo"></span>
+            <span class="mini-photo"></span>
+            <span class="mini-photo"></span>
+            <span class="mini-photo"></span>
+          </span>
+          <span class="layout-name">Layout A</span>
+          <span class="layout-pose">4 Pose</span>
+        </button>
+
+        <button class="layout-card" data-layout="b" type="button">
+          <span class="layout-preview layout-preview-1col">
+            <span class="mini-photo"></span>
+            <span class="mini-photo"></span>
+            <span class="mini-photo"></span>
+          </span>
+          <span class="layout-name">Layout B</span>
+          <span class="layout-pose">3 Pose</span>
+        </button>
+
+        <button class="layout-card" data-layout="c" type="button">
+          <span class="layout-preview layout-preview-1col">
+            <span class="mini-photo"></span>
+            <span class="mini-photo"></span>
+          </span>
+          <span class="layout-name">Layout C</span>
+          <span class="layout-pose">2 Pose</span>
+        </button>
+
+        <button class="layout-card" data-layout="d" type="button">
+          <span class="layout-preview layout-preview-2col">
+            <span class="mini-photo"></span>
+            <span class="mini-photo"></span>
+            <span class="mini-photo"></span>
+            <span class="mini-photo"></span>
+            <span class="mini-photo"></span>
+            <span class="mini-photo"></span>
+          </span>
+          <span class="layout-name">Layout D</span>
+          <span class="layout-pose">6 Pose</span>
+        </button>
+      </div>
+
+      <button id="btnConfirmLayout" class="btn btn-pink">
+        <span>Lanjut ke Kamera</span>
+        <span class="btn-icon">📷</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- HALAMAN 3: KAMERA & COUNTDOWN -->
+  <!-- ============================= -->
+  <section id="pageCamera" class="page">
+    <div class="container">
+
+      <!-- Pemilih Filter -->
+      <div class="picker-group">
+        <p class="picker-label">Pilih Filter</p>
+        <div class="picker-row" id="filterPicker">
+          <button class="picker-pill active" data-filter="original" type="button">Original</button>
+          <button class="picker-pill" data-filter="vintage" type="button">Vintage</button>
+          <button class="picker-pill" data-filter="bw" type="button">B&amp;W</button>
+          <button class="picker-pill" data-filter="warm" type="button">Warm</button>
+          <button class="picker-pill" data-filter="nokia" type="button">Nokia</button>
+          <button class="picker-pill" data-filter="softfocus" type="button">Soft Focus</button>
+          <button class="picker-pill" data-filter="hazydays" type="button">Hazy Days</button>
+          <button class="picker-pill" data-filter="rose" type="button">Rose</button>
+          <button class="picker-pill" data-filter="retro" type="button">Retro</button>
+          <button class="picker-pill" data-filter="cocoa" type="button">Cocoa</button>
+          <button class="picker-pill" data-filter="xpro" type="button">X-Pro</button>
+          <button class="picker-pill" data-filter="envy" type="button">Envy</button>
+          <button class="picker-pill" data-filter="zinc" type="button">Zinc</button>
+        </div>
+      </div>
+
+      <!-- Kontrol Kecerahan Manual -->
+      <div class="picker-group">
+        <p class="picker-label">Kecerahan <span id="brightnessValue">100%</span></p>
+        <input
+          type="range"
+          id="brightnessSlider"
+          class="brightness-slider"
+          min="50"
+          max="180"
+          value="100"
+        >
+      </div>
+
+      <!-- Pemilih Frame / Template -->
+      <div class="picker-group">
+        <p class="picker-label">Pilih Frame</p>
+        <div class="picker-row" id="framePicker">
+          <button class="frame-swatch active" data-frame="cream" type="button">
+            <span class="swatch" style="background:#F3ECDD;"></span>
+            <span class="swatch-name">Cream</span>
+          </button>
+          <button class="frame-swatch" data-frame="noir" type="button">
+            <span class="swatch" style="background:#1C1815;"></span>
+            <span class="swatch-name">Noir</span>
+          </button>
+          <button class="frame-swatch" data-frame="rose" type="button">
+            <span class="swatch" style="background:#F1DCD3;"></span>
+            <span class="swatch-name">Rose</span>
+          </button>
+          <button class="frame-swatch" data-frame="mint" type="button">
+            <span class="swatch" style="background:#DCE8DF;"></span>
+            <span class="swatch-name">Mint</span>
+          </button>
+          <button class="frame-swatch" data-frame="polkadot" type="button">
+            <span class="swatch swatch-polkadot"></span>
+            <span class="swatch-name">Polkadot</span>
+          </button>
+          <button class="frame-swatch" data-frame="none" type="button">
+            <span class="swatch swatch-none"></span>
+            <span class="swatch-name">Tanpa Frame</span>
+          </button>
+        </div>
+      </div>
+
+      <p id="photoCounter" class="counter">0 / 4 foto</p>
+
+      <div class="camera-frame">
+        <video id="video" autoplay playsinline muted></video>
+        <div id="flashEffect" class="flash-effect"></div>
+        <div id="countdownOverlay" class="countdown-overlay"></div>
+      </div>
+
+      <p id="statusMessage" class="status-message">Kamera siap digunakan</p>
+
+      <button id="btnTakePhoto" class="btn btn-primary">Ambil Foto</button>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- HALAMAN 4: HASIL PHOTO STRIP  -->
+  <!-- ============================= -->
+  <section id="pageResult" class="page">
+    <div class="container">
+      <h2 class="title-small">Hasil Photobooth Kamu</h2>
+
+      <!-- Mockup printer: strip akan terlihat "keluar" dari sini -->
+      <div class="printer-body" aria-hidden="true">
+        <div class="printer-slot"></div>
+      </div>
+
+      <div class="print-output">
+        <div class="result-card" id="resultCard">
+          <canvas id="resultCanvas"></canvas>
+        </div>
+      </div>
+
+      <div class="result-buttons">
+        <button id="btnDownload" class="btn btn-primary">Download Foto</button>
+        <button id="btnRetake" class="btn btn-outline">Foto Lagi</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Canvas tersembunyi: tempat kerja untuk memproses tiap foto -->
+  <canvas id="hiddenCanvas" style="display:none;"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
